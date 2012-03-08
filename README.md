@@ -15,10 +15,12 @@ Grab the source from [Peep's GitHub repository](http://github.com/worldeggplant/
 ## Changelog
 
 v0.2
+
 * **Parses**: footnotes
 * **Known bugs**: Editing still doesn't work, selection doesn't work. Ref-style links doesn't work. Basically, What You See Is What You Get, for now, as the previous version.
 
 v0.1
+
 * **Parses** Italic, bold, lists, images, links, blocks, headers
 * **Functionality**: The parser *works*, but interaction and contenteditable part remains to be perfected.
 
