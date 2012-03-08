@@ -330,6 +330,15 @@ var Caret = {
 			}
 		);
 
+		
+		// Strike
+		text = text.replace(/([\W_]|^)(\-)(?=\S)([^\r]*?\S)(\-)([\W_]|$)/g,
+			function(wholeMatch, m1, m2, m3, m4, m5){
+				base.changes++;
+				return m1 + '-' + '<strike>' + m3 + '</strike>' + '-' + m5;
+			}
+		);
+		
 		// footnotes
 		//text = text.replace(/(^.?$)(\[\^([(0-9)+])\])/m,
 		text = text.replace(/(\[\^([0-9+])\])/g,
