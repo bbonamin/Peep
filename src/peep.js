@@ -40,8 +40,7 @@ var Caret = {
 			containerElement = containerElement.parentNode;
 		}
 		
-		if ( parentClass )
-		{
+		if ( parentClass ) {
 			if ( !$(parent).hasClass(parentClass) && $(parent).parents('.'+parentClass).length > 0 ) {
 				parent = $(parent).parents('.'+parentClass).get(0);
 			}
@@ -275,8 +274,7 @@ var Caret = {
 			}
 		);
 		
-		if ( block )
-		{
+		if ( block ) {
 			var pLineLine = pLine.find('.peepline');
 			for ( var i in blockAttr ) {
 				pLineLine.attr(i, blockAttr[i]);
@@ -288,12 +286,10 @@ var Caret = {
 				//.find('.body').html(this.ParseInline(text));
 				.find('.body').html(text);
 		}
-		else if ( text.length > 0 )
-		{
-			pLine.find('.margin').html('').end().find('.body').html(this.ParseInline(text));
+		else if ( text.length > 0 ) {
+			pLine.find('.peepline').removeClass('empty').find('.margin').html('').end().find('.body').html(this.ParseInline(text));
 		}
-		else
-		{
+		else {
 			pLine = peepEmpty.clone();
 		}
 		
@@ -390,8 +386,7 @@ var Caret = {
 	
 	Plugin.prototype.writeAnchorTag = function(wholeMatch, m1, m2, m3, m4, m5, m6, m7, offset, string) {
 		// images are caught by the regex, ignore if the link is prefixed with a !
-		if ( string[0] == '!' || (typeof string[offset-1] !== 'undefined' && string[offset-1] === '!') )
-		{
+		if ( string[0] == '!' || (typeof string[offset-1] !== 'undefined' && string[offset-1] === '!') ) {
 			return wholeMatch;
 		}
 
