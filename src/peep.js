@@ -191,21 +191,20 @@ var Caret = {
 		
 		var pLine = peepLine.clone(),
 			block = false,
-			blockAttr = {},
-			gutter = ( gutter = text.indexOf(' ') ) !== -1 && gutter <= 6 ? text.substring(0,gutter) : false;
+			blockAttr = { 'class': 'peepline' };
 		
 		// Lists
 		text = text.replace(/^(\d+[.]).+?(.*)/m,
 			function (wholeMatch, m1, m2 ) {
 				block = m1;
-				blockAttr.class = 'peep-ol';
+				blockAttr['class'] += ' peep-ol';
 				base.changes++;
 				return base.ParseInline(m2);
 			}
 		).replace(/^(\*|\-).+?(.*)/m,
 			function (wholeMatch, m1, m2 ) {
 				block = m1;
-				blockClass = 'peep-ul';
+				blockAttr['class'] += ' peep-ul';
 				base.changes++;
 				return base.ParseInline(m2);
 			}
@@ -215,7 +214,7 @@ var Caret = {
 		text = text.replace(/^(\[\^([\w+])\]\:)\s(.*)/m,
 			function(wholeMatch, m1, m2, m3) {
 				block = '<a href="#rr' + m2 + '" rev="footnote">[^' + m2 + ']</a>:';
-				blockAttr.class = 'peep-footnote';
+				blockAttr['class'] += ' peep-footnote';
 				blockAttr.id = 'r' + m2;
 				blockAttr.name = 'r' + m2;
 				base.changes++;
@@ -227,7 +226,7 @@ var Caret = {
 		text = text.replace(/^(\[[\w]+\]\:)\s(.*)/,
 			function(wholeMatch, m1, m2) {
 				block = m1;
-				blockAttr.class = 'peep-ref';
+				blockAttr['class'] += ' peep-ref';
 				base.changes++;
 				return base.ParseInline(m2);
 			}
@@ -268,7 +267,7 @@ var Caret = {
 		text = text.replace(/^(\#{1,6})[\s\t]+(.+?)[ \t]*\#*\n*$/m,
 			function (wholeMatch, m1, m2) {
 				base.changes++;
-				blockAttr.class = 'peep-header peep-h' + m1.length;
+				blockAttr['class'] += ' peep-header peep-h' + m1.length;
 				block = m1;
 				return base.ParseInline(m2);
 			}
@@ -277,7 +276,7 @@ var Caret = {
 		if ( block ) {
 			var pLineLine = pLine.find('.peepline');
 			for ( var i in blockAttr ) {
-				pLineLine.attr(i, blockAttr[i]);
+				pLineLine.prop(i, blockAttr[i]);
 			}
 
 			pLine
