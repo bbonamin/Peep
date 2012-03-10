@@ -196,14 +196,14 @@ var Caret = {
 			gutter = ( gutter = text.indexOf(' ') ) !== -1 && gutter <= 6 ? text.substring(0,gutter) : false;
 		
 		// Lists
-		text = text.replace(/^(\d+[.]).+?(.*)/gm,
+		text = text.replace(/^(\d+[.]).+?(.*)/m,
 			function (wholeMatch, m1, m2 ) {
 				block = m1;
 				blockAttr.class = 'peep-ol';
 				base.changes++;
 				return base.ParseInline(m2);
 			}
-		).replace(/^(\*|\-).+?(.*)/gm,
+		).replace(/^(\*|\-).+?(.*)/m,
 			function (wholeMatch, m1, m2 ) {
 				block = m1;
 				blockClass = 'peep-ul';
@@ -213,7 +213,7 @@ var Caret = {
 		);
 
 		// footnotes
-		text = text.replace(/^(\[\^([\w+])\]\:)\s(.*)/gm,
+		text = text.replace(/^(\[\^([\w+])\]\:)\s(.*)/m,
 			function(wholeMatch, m1, m2, m3) {
 				block = '<a href="#rr' + m2 + '" rev="footnote">[^' + m2 + ']</a>:';
 				blockAttr.class = 'peep-footnote';
@@ -250,7 +250,7 @@ var Caret = {
 		
 		text += "~0";
 
-		text = text.replace(/^(\t|\s{4})(.*)/gm,
+		text = text.replace(/^(\t|\s{4})(.*)/m,
 			function (wholeMatch, m1, m2) {
 				var codeblock = m2;
 				codeblock = base._EncodeCode(base._Outdent(codeblock));
@@ -266,7 +266,7 @@ var Caret = {
 		text = text.replace(/~0/, "");
 		
 		// Headers
-		text = text.replace(/^(\#{1,6})[ \t]*(.+?)[ \t]*\#*\n*$/gm,
+		text = text.replace(/^(\#{1,6})[\s\t]+(.+?)[ \t]*\#*\n*$/m,
 			function (wholeMatch, m1, m2) {
 				base.changes++;
 				blockAttr.class = 'peep-header peep-h' + m1.length;
